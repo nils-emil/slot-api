@@ -4,6 +4,8 @@ This project was developed with Java 11.
 
 The project uses no external API-s.
 
+The game reels are configurable via `application.properties`
+
 Example request:
 
 ```
