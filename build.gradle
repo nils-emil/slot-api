@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.1'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.6.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
 }
 
 group = 'ee.slot'
@@ -9,25 +9,38 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
+}
+
+sourceSets {
+    integTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integTest/java')
+        }
+        resources.srcDir file('src/integTest/resources')
+    }
 }
 
 dependencies {
-	compileOnly 'org.projectlombok:lombok:1.18.22'
-	annotationProcessor 'org.projectlombok:lombok:1.18.22'
-	implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.1'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.1'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	testImplementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testCompileOnly 'org.projectlombok:lombok:1.18.22'
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testImplementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    integTestImplementation 'org.springframework.boot:spring-boot-starter-test'
+    integTestImplementation 'org.springframework.boot:spring-boot-starter-web'
+    integTestImplementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
+    integTestImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.1'
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
+
