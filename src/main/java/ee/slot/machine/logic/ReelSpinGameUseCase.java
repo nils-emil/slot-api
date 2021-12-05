@@ -28,6 +28,7 @@ public class ReelSpinGameUseCase {
                 .initialBet(command.getBet())
                 .totalWin(totalWin)
                 .winningRows(winningRows)
+                .playerBalance(steps.getPlayerBalance())
                 .reelWindow(reelWindow)
                 .build();
     }

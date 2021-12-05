@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -27,10 +28,9 @@ public class ReelSpinGameUseCaseSteps {
             int rotateAmount = rand.nextInt(gameConfiguration.getMaximumNumberOfRotations());
             int numberOfElementsInReel = reel.size();
             int realRotation = rotateAmount % numberOfElementsInReel;
-            List<Card> e = new ArrayList<>();
-            e.addAll(reel.subList(realRotation, reel.size()));
-            e.addAll(reel.subList(0, realRotation));
-            shiftedReels.add(e);
+            List<Card> copyOfReel = new ArrayList<>(reel);
+            Collections.rotate(copyOfReel, realRotation);
+            shiftedReels.add(copyOfReel);
         }
         return shiftedReels;
     }
@@ -70,5 +70,9 @@ public class ReelSpinGameUseCaseSteps {
     public void updateUserBalance(int bet, int totalWin) {
         Integer currentBalance = playerService.getPlayerBalance();
         playerService.updatePlayerBalance(currentBalance - bet + totalWin);
+    }
+
+    public int getPlayerBalance() {
+       return playerService.getPlayerBalance();
     }
 }

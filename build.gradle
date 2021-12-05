@@ -23,6 +23,10 @@ sourceSets {
     }
 }
 
+rootProject.tasks.named("processIntegTestResources") {
+    duplicatesStrategy = 'include'
+}
+
 dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 

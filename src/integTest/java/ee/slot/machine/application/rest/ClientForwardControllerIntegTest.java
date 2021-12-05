@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestPropertySource(locations="classpath:integTest.properties")
 class ClientForwardControllerIntegTest {
 
     @Autowired
@@ -36,6 +38,7 @@ class ClientForwardControllerIntegTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.initialBet").value(10))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.totalWin").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.playerBalance").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.reelWindow").isNotEmpty());
     }
 

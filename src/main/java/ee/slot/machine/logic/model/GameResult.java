@@ -11,6 +11,7 @@ public class GameResult {
 
     private int initialBet;
     private int totalWin;
+    private int playerBalance;
     private Card[][] reelWindow;
     private List<WinningRow> winningRows;
 
