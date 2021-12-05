@@ -1,6 +1,9 @@
 package ee.slot.machine.logic;
 
-import ee.slot.machine.logic.model.*;
+import ee.slot.machine.logic.model.Card;
+import ee.slot.machine.logic.model.GameResult;
+import ee.slot.machine.logic.model.PlayReelSpinGameCommand;
+import ee.slot.machine.logic.model.WinningRow;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
