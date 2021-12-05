@@ -1,6 +1,7 @@
 package ee.slot.machine.logic;
 
 import ee.slot.machine.logic.model.Card;
+import ee.slot.machine.logic.model.PlayReelSpinGameCommand;
 import ee.slot.machine.logic.model.WinningRow;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.Random;
 public class ReelSpinGameUseCaseSteps {
 
     private final GameConfiguration gameConfiguration;
+    private final PlayerService playerService;
 
     public List<List<Card>> findInitialReels() {
         return gameConfiguration.getSlotMachineReels();
@@ -60,4 +62,14 @@ public class ReelSpinGameUseCaseSteps {
         return totalWin;
     }
 
+    public void validateUserBalance(Integer bet) {
+        if (playerService.getPlayerBalance() < bet) {
+            throw new IllegalArgumentException("User does not have enought balance to play");
+        }
+    }
+
+    public void updateUserBalance(int bet, int totalWin) {
+        Integer currentBalance = playerService.getPlayerBalance();
+        playerService.updatePlayerBalance(currentBalance - bet + totalWin);
+    }
 }

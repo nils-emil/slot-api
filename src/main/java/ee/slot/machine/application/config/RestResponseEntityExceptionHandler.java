@@ -21,4 +21,13 @@ public class RestResponseEntityExceptionHandler {
                         .build());
     }
 
+    @ExceptionHandler(value = {IllegalArgumentException.class})
+    protected ResponseEntity<Object> illegalArgumentException(IllegalArgumentException ex, WebRequest request) {
+        return ResponseEntity.status(400)
+                .body(Error
+                        .builder()
+                        .reason(ex.getMessage())
+                        .build());
+    }
+
 }

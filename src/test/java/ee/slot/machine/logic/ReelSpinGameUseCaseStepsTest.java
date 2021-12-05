@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ReelSpinGameUseCaseStepsTest {
@@ -25,6 +25,9 @@ class ReelSpinGameUseCaseStepsTest {
 
     @Mock
     private GameConfiguration gameConfiguration;
+
+    @Mock
+    private PlayerService playerService;
 
     @Test
     public void findInitialReels() {
@@ -148,6 +151,39 @@ class ReelSpinGameUseCaseStepsTest {
         Integer result = useCaseSteps.calculateBaseWin(window, Collections.singletonList(WinningRow.HORIZONTAL_TOP));
 
         assertEquals(100, result);
+    }
+
+    @Test
+    public void validateUserBalanceSuccess() {
+        when(playerService.getPlayerBalance()).thenReturn(80);
+
+        assertDoesNotThrow(() -> useCaseSteps.validateUserBalance(60));
+    }
+
+    @Test
+    public void validateUserBalanceSuccessBetTakesWholeBalance() {
+        when(playerService.getPlayerBalance()).thenReturn(60);
+
+        assertDoesNotThrow(() -> useCaseSteps.validateUserBalance(60));
+    }
+
+    @Test
+    public void validateUserBalanceFails() {
+        when(playerService.getPlayerBalance()).thenReturn(50);
+
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class,
+                () -> useCaseSteps.validateUserBalance(60));
+
+        assertEquals("User does not have enought balance to play", illegalArgumentException.getMessage());
+    }
+
+    @Test
+    public void updateUserBalance() {
+        when(playerService.getPlayerBalance()).thenReturn(50);
+
+        useCaseSteps.updateUserBalance(20, 5);
+
+        verify(playerService, times(1)).updatePlayerBalance(35);
     }
 
 }
