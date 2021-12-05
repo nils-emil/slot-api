@@ -31,17 +31,17 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     compileOnly 'org.projectlombok:lombok:1.18.22'
-    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.1'
+    implementation 'jakarta.validation:jakarta.validation-api:2.0.2'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    testImplementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+    testImplementation 'org.apache.commons:commons-lang3:3.12.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     integTestImplementation 'org.springframework.boot:spring-boot-starter-test'
     integTestImplementation 'org.springframework.boot:spring-boot-starter-web'
-    integTestImplementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
-    integTestImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.1'
+    integTestImplementation 'jakarta.validation:jakarta.validation-api:2.0.2'
+    integTestImplementation 'org.springframework.boot:spring-boot-starter-validation:'
 }
 
 test {
