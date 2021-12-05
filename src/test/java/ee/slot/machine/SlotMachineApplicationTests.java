@@ -1,4 +1,4 @@
-package ee.slot.SlotMachine;
+package ee.slot.machine;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

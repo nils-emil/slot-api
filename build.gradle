@@ -13,9 +13,19 @@ repositories {
 }
 
 dependencies {
+	compileOnly 'org.projectlombok:lombok:1.18.22'
+	annotationProcessor 'org.projectlombok:lombok:1.18.22'
+	implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.1'
+
+
+	testImplementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompileOnly 'org.projectlombok:lombok:1.18.22'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
 }
 
 test {
